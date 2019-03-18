@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This social network tracks restaurants' willingness to split the check. It's 2019, people no longer carry cash 
+and want change. It takes the restaurant an extra 10 seconds to split the check. Stay informed and support those 
+restaurants willing to spend those 10 seconds to make your dining experience better.
 
-Things you may want to cover:
+Good to know:
 
-* Ruby version
+### Ruby/Rails version
+Ruby 2.5.1 (Linux)
 
-* System dependencies
+Rails 5.2.2.1
 
-* Configuration
+### Database initialization
+Seed the database with rake db:seed
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Test suite
+Test the logic by running rake test

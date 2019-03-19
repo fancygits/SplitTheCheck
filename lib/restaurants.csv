@@ -1,0 +1,94 @@
+name,cuisine,street_address,city,state,postcode,will_split,wont_split
+"Al's Beef","Italian","1079 W Taylor St","Chicago","IL","60585",5,4
+Amanecer Tapatio,Mexican,573 Collins St,Joliet,IL,60427,5,9
+Barbara Ann's,American,7617 S Cottage Grove Ave,Chicago,IL,60606,4,7
+Birrieria Reyes de Ocotlan,Mexican,1322 W 18th St,Chicago,IL,60200,13,12
+Bombon Bakery,Mexican,1508 W 18th St,Chicago,IL,60163,3,8
+Burt's Place,American,8541 N Ferris,Morton Grove,IL,60373,10,8
+Butter,American,130 S Green St,Chicago,IL,60244,11,5
+Café Nhu Hoa,Vietnamese,1020 W Argyle St,Chicago,IL,60253,3,0
+Café Salamera,Peruvian,6653 N Clark St,Chicago,IL,60248,1,3
+Cafeteria Marianao,Cuban,2246 N Milwaukee Ave,Chicago,IL,60594,8,3
+Calumet Fisheries,American,3259 E 95th Street,Chicago,IL,60616,7,1
+Candlelite,American,7452 N Western Ave,Chicago,IL,60198,6,2
+Chopal Kabab,Indo/Pak,2240 W Devon Ave,Chicago,IL,60494,4,12
+Chuck's Southern Cafe,American,5557 W 79th St,Burbank,IL,60523,9,13
+City Noor Kebab,Palestinian,4714 N Kedzie St,Chicago,IL,60573,10,0
+Cunis Candies,American,1030 E 162nd St,South Holland,IL,60138,11,5
+Dong Ky,Vietnamese,4877 N Broadway,Chicago,IL,60599,6,3
+Dong Thanh,Vietnamese,4925 B N Broadway,Chicago,IL,60292,8,0
+Ed's Potsticker House,Chinese,3139 S Halsted,Chicago,IL,60210,8,11
+El Nuevo Kappy's,Mexican,2759 W Cermak Rd,Chicago,IL,60317,8,13
+Fabulous Noodles,Chinese,4663 Old Tavern Rd,Lisle,IL,60156,10,10
+Follia,Italian,953 W Fulton St,Chicago,IL,60409,4,11
+Fonda del Mar,Mexican,3749 W Fullerton Ave,Chicago,IL,60368,14,2
+Freddy's,Italian,1600 S 61st Avenue,Cicero,IL,60261,3,8
+Frontera / Topolo,Mexican,445 N Clark St,Chicago,IL,60457,13,8
+Furama,Chinese,4936 N Broadway,Chicago,IL,60586,10,3
+Gene and Jude's,American,2720 River Rd,River Grove,IL,60533,14,5
+Ghareeb Nawaz,Indo/Pak,2032 W Devon Ave,Chicago,IL,60601,2,8
+Hai Woon Dae,Korean,6420 N California Ave,Chicago,IL,60444,9,5
+Hai Yen,Vietnamese,1055 W Argyle,Chicago,IL,60564,11,7
+Honey 1 BBQ,American,2241 N Western Ave,Chicago,IL,60583,3,7
+Hopleaf,Belgian,5148 N Clark St,Chicago,IL,60176,8,8
+Hot Doug's,American,3324 N California Ave,Chicago,IL,60558,11,15
+Hyderabad House,Indo/Pak,2225 W Devon Ave,Chicago,IL,60133,0,8
+Iraqi Kebab House,Iraqi,4835 Nkedzie Ave,Chicago,IL,60524,15,14
+Johnnie's Beef,American,7500 W North Ave,Elmwood Park,IL,60532,11,10
+Kang Nam Galbi,Korean,4849 N Kedzie Ave,Chicago,IL,60215,10,6
+Katsu,Japanese,2651 W Peterson Ave,Chicago,IL,60680,5,1
+Katy's Dumpling House,Chinese,665 N Cass Ave,Westmont,IL,60464,9,9
+Khan BBQ,Indo/Pak,2401 W Devon Ave,Chicago,IL,60416,13,0
+Klas,Hungarian,5734 W Cermak Rd,Cicero,IL,60525,12,11
+La Casa de Samuel,Mexican,2834 W Cermak,Chicago,IL,60151,5,5
+La Quebrada,Mexican,4859 W Roosevelt Rd,Cicero,IL,60179,12,10
+La Unica,Cuban,1515 W Devon Ave,Chicago,IL,60449,2,4
+Lao Sze Chuan,Chinese,2172 S Archer Ave,Chicago,IL,60278,10,4
+Laschet's Inn,German,2119 W Irving Park Rd,Chicago,IL,60154,9,5
+Little Three Happiness,Chinese,209 W Cermak Rd,Chicago,IL,60468,8,3
+Los Nopales,Mexican,4544 N Western,Chicago,IL,60412,6,9
+Lula Café,American,2537 N Kedzie Blvd,Chicago,IL,60313,3,5
+Mandarin Kitchen,Chinese,2143 S Archer Ave,Chicago,IL,60549,1,3
+Manny's,American,1141 S Jefferson,Chicago,IL,60579,10,14
+Moon Palace,Chinese,216 W Cermak Rd,Chicago,IL,60248,2,1
+Moto,American,945 W Fulton Market,Chicago,IL,60589,2,4
+Mundial Cocina Mestiza,Mexican,1640 W 18th St,Chicago,IL,60629,15,12
+Noon O Kabab,Persian,4661 N Kedzie Ave,Chicago,IL,60318,15,10
+Nuevo Leon,Mexican,1515 W 18th St,Chicago,IL,60506,14,12
+Pho 777,Vietnamese,1065 W Argyle,Chicago,IL,60278,10,11
+Pho 888,Vietnamese,1137 W Argyle,Chicago,IL,60310,1,2
+Podhalanka,Polish,1549 W Division St,Chicago,IL,60467,14,3
+Priscilla's Buffet,American,4330 W Roosevelt Rd,Hillside,IL,60160,3,6
+Renga-Tei,Japanese,3956 W Touhy Ave,Lincolnwood,IL,60508,5,9
+Ristorante Agostino,Italian,2817 N Harlem Ave,Chicago,IL,60485,8,11
+Riviera Foods,Italian,3220 N Harlem Ave,Chicago,IL,60463,9,15
+Sabatino's,Italian,4441 W Irving Park Rd,Chicago,IL,60377,14,6
+Sabri Nehari,Indo/Pak,2511 W Devon Ave,Chicago,IL,60565,9,4
+Sakuma's,Japanese,43 S Sutton Rd,Streamwood,IL,60148,12,1
+Salam,Middle East,4636 N Kedzie Ave,Chicago,IL,60344,12,12
+San Soo Gap San,Korean,5247 N Western Ave,Chicago,IL,60599,6,2
+Schwa,American,1466 N Ashland Ave,Chicago,IL,60449,7,11
+Scooter's,American,1658 W Belmont Ave,Chicago,IL,60295,4,2
+Semiramis,Lebanese,4639 N Kedzie St,Chicago,IL,60493,5,10
+Shan,Indo/Pak,5060-A N Sheridan Rd,Chicago,IL,60596,5,5
+Silver Seafood,Chinese,4829 N Broadway,Chicago,IL,60265,11,9
+Sol de Mexico,Mexican,3018 N Cicero,Chicago,IL,60681,4,1
+Spacca Napoli,Italian,1769 W Sunnside St,Chicago,IL,60180,12,13
+Spoon,Thai,4608 N Western Ave,Chicago,IL,60150,15,9
+Steve's Shish Kebab,Middle East,3816 W 63rd St,Chicago,IL,60555,10,7
+Sticky Rice,Thai,4018 N Western Ave,Chicago,IL,60176,0,1
+Sun Wah BBQ,Chinese,1134 W Argyle,Chicago,IL,60458,8,15
+Sunshine Café,Japanese,5449 N Clark St,Chicago,IL,60189,3,10
+Sweets and Savories,American,1534 W Fullerton,Chicago,IL,60426,2,1
+TAC Quick,Thai,3930 N Sheridan Rd,Chicago,IL,60338,0,13
+Tank (Pho Xe Tank),Vietnamese,4953 N Broadway,Chicago,IL,60667,0,4
+Taqueria Oaxaquena,Mexican,3382 N Milwaukee Ave,Chicago,IL,60447,9,10
+Taqueria Puebla,Mexican,3619 W North Av,Chicago,IL,60409,12,1
+Thai Avenue,Thai,4949 N Broadway,Chicago,IL,60257,0,2
+The Elephant,Thai,5348 W Devon Ave,Chicago,IL,60529,8,0
+Tien Giang,Vietnamese,1104 W Argyle,Chicago,IL,60365,5,8
+Tiffin,Indo/Pak,2536 W Devon Ave,Chicago,IL,60371,1,5
+Tre Kronor,Swedish,3258 W Foster Ave,Chicago,IL,60534,0,8
+Volo,American,2008 W Roscoe St,Chicago,IL,60574,2,5
+White Palace Grill,American,1159 S Canal St,Chicago,IL,60361,2,14
+Yum Thai,Thai,7748 W Madison St,Forest Park,IL,60233,4,12

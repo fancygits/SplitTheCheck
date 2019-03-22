@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Restaurants</h1>
+<%= "You've voted for these restaurants: #{session[:votes]}" %>
 
 <table>
   <thead>
@@ -30,7 +31,8 @@
         <td><%= restaurant.wont_split %></td>
         <td><%= link_to 'Show', restaurant %></td>
         <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
-        <td><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to "Will Split", vote_restaurant_path(restaurant, :split => 'will_split'), method: :put %></td>
+        <td><%= button_to "Won't Split", vote_restaurant_path(restaurant, :split => 'wont_split'), method: :put %></td>
       </tr>
     <% end %>
   </tbody>

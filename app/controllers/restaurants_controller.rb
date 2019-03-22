@@ -1,5 +1,6 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
+  before_action :set_restaurant, only: [:show, :edit, :update, :vote]
+  before_action :get_votes
 
   # GET /restaurants
   # GET /restaurants.json
@@ -61,7 +62,29 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def vote
+    unless session[:votes].include? @restaurant.name
+      if params[:split] == 'wont_split'
+        @restaurant.vote_wont_split
+      elsif params[:split] == 'will_split'
+        @restaurant.vote_will_split
+      end
+      session[:votes].push @restaurant.name
+      redirect_to root_path
+    end
+  end
+
+  # def already_voted
+  #   @votes.include? @restaurant.name
+  # end
+
   private
+    def get_votes
+      if session[:votes].nil?
+        session[:votes] = []
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_restaurant
       @restaurant = Restaurant.find(params[:id])

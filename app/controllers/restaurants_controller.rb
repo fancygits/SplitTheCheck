@@ -62,21 +62,15 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  # Tells the restaurant to vote
   def vote
     unless session[:votes].include? @restaurant.name
-      if params[:split] == 'wont_split'
-        @restaurant.vote_wont_split
-      elsif params[:split] == 'will_split'
-        @restaurant.vote_will_split
+      if @restaurant.vote(params[:split])
+        session[:votes].push @restaurant.name
+        redirect_to root_path
       end
-      session[:votes].push @restaurant.name
-      redirect_to root_path
     end
   end
-
-  # def already_voted
-  #   @votes.include? @restaurant.name
-  # end
 
   private
     def get_votes

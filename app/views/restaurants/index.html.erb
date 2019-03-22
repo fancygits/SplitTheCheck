@@ -31,8 +31,14 @@
         <td><%= restaurant.wont_split %></td>
         <td><%= link_to 'Show', restaurant %></td>
         <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
-        <td><%= button_to "Will Split", vote_restaurant_path(restaurant, :split => 'will_split'), method: :put %></td>
-        <td><%= button_to "Won't Split", vote_restaurant_path(restaurant, :split => 'wont_split'), method: :put %></td>
+        <td><%= button_to "Will Split",
+                  vote_restaurant_path(restaurant, :split => 'will_split'),
+                  method: :put %>
+        </td>
+        <td><%= button_to "Won't Split",
+                  vote_restaurant_path(restaurant, :split => 'wont_split'),
+                  method: :put %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:show, :edit, :update, :vote]
+  before_action :set_restaurant, only: [:show, :edit, :update, :vote, :already_voted]
   before_action :get_votes
 
   # GET /restaurants
@@ -72,11 +72,16 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def already_voted
+    return session[:votes].include? @restaurant.name
+  end
+
   private
     def get_votes
       if session[:votes].nil?
         session[:votes] = []
       end
+      @votes = session[:votes]
     end
 
     # Use callbacks to share common setup or constraints between actions.

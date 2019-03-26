@@ -25,23 +25,32 @@
         <td><%= restaurant.city %></td>
         <td><%= restaurant.state %></td>
         <td><%= restaurant.postcode %></td>
-        <td class="vote_button">
-          <% unless session[:votes].include? restaurant.name %>
-            <%= button_to vote_restaurant_path(restaurant, :split => 'will_split'),
-                  class: "will hvr-icon-bob hvr-shutter-out-horizontal", method: :put do %>
-              <i class="fas fa-thumbs-up hvr-icon"></i>
-              <%= restaurant.will_split %><br> Will Split
-            <% end %>
+        <td>
+        <% unless session[:votes].include? restaurant.name %>
+          <%= button_to vote_restaurant_path(restaurant, :split => 'will_split'),
+                {class: "hvr-icon-bob hvr-shutter-out-horizontal", method: :put} do %>
+            <i class="fas fa-thumbs-up hvr-icon"></i>
+            <%= restaurant.will_split %><br> Will Split
           <% end %>
         </td>
-        <td class="vote_button">
-          <% unless session[:votes].include? restaurant.name %>
-            <%= button_to vote_restaurant_path(restaurant, :split => 'wont_split'),
-                  class: "wont hvr-icon-bob hvr-shutter-in-horizontal", method: :put do %>
-              <i class="fas fa-thumbs-down hvr-icon"></i>
-              <%= restaurant.wont_split %><br> Won't Split
-            <% end %>
+        <td>
+          <%= button_to vote_restaurant_path(restaurant, :split => 'wont_split'),
+                class: "hvr-icon-bob hvr-shutter-in-horizontal", method: :put do %>
+            <i class="fas fa-thumbs-down hvr-icon"></i>
+            <%= restaurant.wont_split %><br> Won't Split
           <% end %>
+        <% else %>
+          <%= button_tag '#', {class: "disabled will"} do %>
+            <i class="fas fa-thumbs-up"></i>
+            <%= restaurant.will_split %><br> Will Split
+          <% end %>
+        </td>
+        <td>
+          <%= button_tag '#', {class: "disabled wont"} do %>
+            <i class="fas fa-thumbs-down"></i>
+            <%= restaurant.wont_split %><br> Won't Split
+          <% end %>
+        <% end %>
         </td>
       </tr>
     <% end %>

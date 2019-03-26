@@ -72,10 +72,6 @@ class RestaurantsController < ApplicationController
     end
   end
 
-  def already_voted
-    return session[:votes].include? @restaurant.name
-  end
-
   private
     def get_votes
       if session[:votes].nil?
@@ -87,6 +83,7 @@ class RestaurantsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_restaurant
       @restaurant = Restaurant.find(params[:id])
+      @restaurant.already_voted = session[:votes].include? @restaurant.name
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

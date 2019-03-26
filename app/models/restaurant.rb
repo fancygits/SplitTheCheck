@@ -1,4 +1,9 @@
 class Restaurant < ApplicationRecord
+  attr_accessor :already_voted
+
+  def initialize
+    @already_voted = false
+  end
 
   # Increases the will_split or wont_split vote by 1
   def vote(split)

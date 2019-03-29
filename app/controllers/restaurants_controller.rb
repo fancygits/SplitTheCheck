@@ -64,7 +64,7 @@ class RestaurantsController < ApplicationController
 
   # Tells the restaurant to vote
   def vote
-    unless session[:votes].include? @restaurant.name
+    unless @votes.include? @restaurant.name
       if @restaurant.vote(params[:split])
         session[:votes].push @restaurant.name
         redirect_to root_path
@@ -83,7 +83,7 @@ class RestaurantsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_restaurant
       @restaurant = Restaurant.find(params[:id])
-      @restaurant.already_voted = session[:votes].include? @restaurant.name
+      # @restaurant.already_voted = session[:votes].include? @restaurant.name
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

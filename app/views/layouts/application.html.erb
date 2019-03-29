@@ -4,7 +4,7 @@
     <title>SplitTheCheck</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
@@ -12,6 +12,34 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="main">
+      <h1>SplitTheCheck</h1>
+      <h2>The best places to eat, when you don't want to treat!</h2>
+    </header>
+    <section class="content">
+      <nav class="side_nav">
+        <ul>
+          <li><%= link_to 'Home', root_path %></li>
+          <li><%= link_to 'New Restaurant', new_restaurant_path %></li>
+        </ul>
+        <div id="searchbar">
+          <%= form_tag(restaurants_path) do %>
+            <%= text_field_tag :restaurant, nil, size: 15, placeholder: "Restaurant name or city" %>
+            <%= submit_tag 'Search' %>
+          <% end %>
+        </div>
+        <div id="debug">
+          <p>You've voted for these restaurants:</p>
+          <ul>
+            <% @votes.each do |vote| %>
+              <li><%= vote %></li>
+            <% end %>
+          <ul>
+        </div>
+      </nav>
+      <main class='<%= controller.controller_name %>'>
+        <%= yield %>
+      </main>
+    </section>
   </body>
 </html>

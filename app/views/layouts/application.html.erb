@@ -23,8 +23,8 @@
           <li><%= link_to 'New Restaurant', new_restaurant_path %></li>
         </ul>
         <div id="searchbar">
-          <%= form_tag(restaurants_path) do %>
-            <%= text_field_tag :restaurant, nil, size: 15, placeholder: "Restaurant name or city" %>
+          <%= form_tag(restaurants_path, method: :get) do %>
+            <%= text_field_tag :search, params[:search], size: 15, placeholder: "Restaurant name or city" %>
             <%= submit_tag 'Search' %>
           <% end %>
         </div>

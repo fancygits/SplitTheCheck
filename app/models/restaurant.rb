@@ -12,7 +12,7 @@ class Restaurant < ApplicationRecord
                                       OR LOWER(city) LIKE :term
                                       OR LOWER(state) LIKE :term
                                       OR LOWER(postcode) LIKE :term',
-                                      term: "%#{search.downcase}%").order('name')
+                                      term: "%#{search.downcase}%")
       if restaurant.count.zero?
         raise StandardError.new "Searching for \"#{search}\" yielded no results."
         restaurant = Restaurant.all

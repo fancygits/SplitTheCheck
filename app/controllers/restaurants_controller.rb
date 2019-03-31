@@ -6,7 +6,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants
   # GET /restaurants.json
   def index
-    @restaurants = Restaurant.search(params[:search])
+    @restaurants = Restaurant.order('name').search(params[:search])
   end
 
   # GET /restaurants/1
@@ -68,7 +68,7 @@ class RestaurantsController < ApplicationController
     unless @votes.include? @restaurant.name
       if @restaurant.vote(params[:split])
         session[:votes].push @restaurant.name
-        redirect_to root_path
+        redirect_back(fallback_location: root_path)
       end
     end
   end

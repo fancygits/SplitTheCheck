@@ -1,6 +1,7 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :vote, :already_voted]
   before_action :get_votes
+  rescue_from StandardError, with: :no_results
 
   # GET /restaurants
   # GET /restaurants.json
@@ -72,12 +73,21 @@ class RestaurantsController < ApplicationController
     end
   end
 
+rescue_from 'ActiveRecord::RecordNotFound' do |exception|
+  redirect_to root_path, notice: exception.message
+end
+
   private
     def get_votes
       if session[:votes].nil?
         session[:votes] = []
       end
       @votes = session[:votes]
+    end
+
+    def no_results
+      logger.error "Search term \"#{params[:search]}\" yielded no results."
+      redirect_to root_path, notice: "Search term \"#{params[:search]}\" yielded no results."
     end
 
     # Use callbacks to share common setup or constraints between actions.
@@ -88,6 +98,6 @@ class RestaurantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def restaurant_params
-      params.require(:restaurant).permit(:name, :cuisine, :street_address, :city, :state, :postcode, :will_split, :wont_split, :search)
+      params.require(:restaurant).permit(:name, :cuisine, :street_address, :city, :state, :postcode, :search)
     end
 end

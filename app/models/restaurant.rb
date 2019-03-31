@@ -1,14 +1,23 @@
 class Restaurant < ApplicationRecord
 
+  class Error < StandardError
+  end
+
+  # Searches the database for similar names or returns all
   def self.search(search)
     if search
-      restaurant = Restaurant.find_by(name: search)
-      if restaurant
-        self.where(restaurant_id: restaurant)
-      else
-        Restaurant.all
+      restaurant = Restaurant.where('LOWER(name) LIKE ?', "%#{search.downcase}%").order('name')
+
+      if restaurant.count.zero?
+        raise StandardError.new "Searching for \"#{search}\" yielded no results."
+        restaurant = Restaurant.all
+        throw :abort
       end
+      return restaurant
+    else
+      Restaurant.all
     end
+  end
 
   # Increases the will_split or wont_split vote by 1
   def vote(split)

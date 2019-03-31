@@ -6,8 +6,13 @@ class Restaurant < ApplicationRecord
   # Searches the database for similar names or returns all
   def self.search(search)
     if search
-      restaurant = Restaurant.where('LOWER(name) LIKE ?', "%#{search.downcase}%").order('name')
-
+      restaurant = Restaurant.where('LOWER(name) LIKE :term
+                                      OR LOWER(cuisine) LIKE :term
+                                      OR LOWER(street_address) LIKE :term
+                                      OR LOWER(city) LIKE :term
+                                      OR LOWER(state) LIKE :term
+                                      OR LOWER(postcode) LIKE :term',
+                                      term: "%#{search.downcase}%").order('name')
       if restaurant.count.zero?
         raise StandardError.new "Searching for \"#{search}\" yielded no results."
         restaurant = Restaurant.all

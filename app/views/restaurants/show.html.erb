@@ -5,7 +5,15 @@
   <p class="mb-0"><%= notice %></p>
 </aside>
 <% end %>
-<%= content_tag(:h1,"#{@restaurant.name}") %>
+<h1>
+  <%= @restaurant.name %>
+  <%= content_tag :small, "#{@restaurant.cuisine}", class: "text-muted" %>
+</h1>
+
+<p class="lead">
+<%= "#{@restaurant.street_address}, #{@restaurant.city},
+  #{@restaurant.state}  #{@restaurant.postcode}" %>
+</p>
 
 <div>
   <% unless @votes.include? @restaurant.name %>
@@ -33,46 +41,8 @@
     <% end %>
   <% end %>
 </div>
-
+<p></p>
 <p>
-  <strong>Name:</strong>
-  <%= @restaurant.name %>
-</p>
-
-<p>
-  <strong>Cuisine:</strong>
-  <%= @restaurant.cuisine %>
-</p>
-
-<p>
-  <strong>Street address:</strong>
-  <%= @restaurant.street_address %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @restaurant.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @restaurant.state %>
-</p>
-
-<p>
-  <strong>Postcode:</strong>
-  <%= @restaurant.postcode %>
-</p>
-
-<p>
-  <strong>Will split:</strong>
-  <%= @restaurant.will_split %>
-</p>
-
-<p>
-  <strong>Wont split:</strong>
-  <%= @restaurant.wont_split %>
-</p>
-
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', :back %>
+<%= link_to 'Back', root_path %>
+</p>

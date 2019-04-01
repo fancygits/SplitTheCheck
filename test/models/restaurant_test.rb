@@ -99,7 +99,7 @@ class RestaurantTest < ActiveSupport::TestCase
 
   test "search uses wildcards before and after terms" do
     r = Restaurant.search("e")
-    assert_equal 32, r.count
+    assert_equal 33, r.count
   end
 
   test "search throws a StandardError on no results" do

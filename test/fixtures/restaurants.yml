@@ -16,6 +16,14 @@ two:
   state: Il
   postcode: MyString
 
+magic:
+  name: Abacadabra
+  cuisine: Magical
+  street_address: 56 Hocus Pocus Ln
+  city: Azkaban
+  state: EG
+  postcode: 56734
+
 unique:
   name: Unique New York
   cuisine: Pan-Asian-South-African

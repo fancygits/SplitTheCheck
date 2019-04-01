@@ -1,12 +1,23 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :vote, :already_voted]
   before_action :get_votes
+  before_action :get_total_pages, only: [:index]
+  before_action :get_search_term, only: [:index]
   rescue_from StandardError, with: :no_results
 
   # GET /restaurants
   # GET /restaurants.json
   def index
-    @restaurants = Restaurant.order('name').search(params[:search])
+    # @restaurants = Restaurant.all
+    @page = session[:page].to_i
+    if params[:search]
+      session[:page] = 1
+      session[:search] = params[:search]
+    end
+    @restaurants = Restaurant.order('name').search(session[:search]).limit(10).offset((@page - 1) * 10)
+    get_total_pages
+    @total_pages = session[:total_pages]
+    return @restaurants
   end
 
   # GET /restaurants/1
@@ -73,6 +84,19 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def clear_search
+    session.delete(:search)
+    session[:page] = 1
+    redirect_to root_path
+  end
+
+  # Sets the page number and redirects to root to display that page's records
+  def page
+    page = params[:page].to_i.clamp(1, session[:total_pages].to_i)
+    session[:page] = page
+    redirect_to root_path
+  end
+
 rescue_from 'ActiveRecord::RecordNotFound' do |exception|
   redirect_to root_path, notice: exception.message
 end
@@ -88,16 +112,28 @@ end
     def no_results
       logger.error "Search term \"#{params[:search]}\" yielded no results."
       redirect_to root_path, notice: "Search term \"#{params[:search]}\" yielded no results."
+      session.delete(:search)
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_restaurant
       @restaurant = Restaurant.find(params[:id])
-      # @restaurant.already_voted = session[:votes].include? @restaurant.name
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def restaurant_params
       params.require(:restaurant).permit(:name, :cuisine, :street_address, :city, :state, :postcode, :search)
+    end
+
+    def get_search_term
+      session[:search] ||= params[:search]
+    end
+
+    def set_page
+      session[:page] ||= 1
+    end
+
+    def get_total_pages
+      session[:total_pages] = (Restaurant.search(session[:search]).count / 10.0).ceil
     end
 end

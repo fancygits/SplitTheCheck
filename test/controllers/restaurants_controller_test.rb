@@ -50,10 +50,39 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "should return search results" do
+    get restaurants_url(params: { search: "American" })
+    assert_response :success
+    assert_equal "American", session[:search]
+    assert_equal 1, session[:page]
+    assert_equal 3, session[:total_pages]
+    assert_select 'tr', 10
+  end
+
+  test "should vote and add to votes array" do
+    get restaurant_url(@restaurant)
+    assert_equal 0, session[:votes].count
+    assert_equal 0, @restaurant.will_split
+    put vote_restaurant_path(@restaurant), params: { split: "will_split" }
+    assert_equal 1, session[:votes].count
+  end
+
+  test "should clear the search term and page" do
+    get clear_path
+    assert_redirected_to root_path
+    assert session[:search].nil?
+    assert_equal 1, session[:page]
+  end
+
+  test "should redirect on RecordNotFound" do
+    get restaurant_url(123125132)
+    assert_redirected_to root_path
+  end
+
   # Starts on page 1, confirms redirect and 10 restaurants, except page 4 which has 3
   test "should navigate to each page from page 1 up to 4" do
     get root_path
-    assert_equal session[:total_pages], 4
+    assert_equal 4, session[:total_pages]
     1.upto(3) do |page|
       get page_path(page)
       assert_response :redirect
@@ -63,7 +92,7 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     end
     get page_path(4)
     assert_response :redirect
-    assert_equal session[:page], 4
+    assert_equal 4, session[:page]
     get root_path
     assert_select 'table tbody tr', minimum: 2
   end
@@ -71,16 +100,16 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
   # Starts on page 4, confirms redirect and restaurants
   test "should navigate to each page from page 4 down to 1" do
     get root_path
-    assert_equal session[:total_pages], 4
+    assert_equal 4, session[:total_pages]
     get page_path(11)
     assert_response :redirect
-    assert_equal session[:page], 4
+    assert_equal 4, session[:page]
     get root_path
     assert_select 'table tbody tr', minimum: 2
     3.downto(1) do |page|
       get page_path(page)
       assert_response :redirect
-      assert_equal session[:page], page
+      assert_equal page, session[:page]
       get root_path
       assert_select 'table tbody tr', minimum: 10
     end
@@ -90,15 +119,15 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     get root_path
     get page_path(15)
     assert_response :redirect
-    assert_equal session[:page], 4 #Max page
+    assert_equal 4, session[:page] #Max page
     get page_path(12)
     assert_response :redirect
-    assert_equal session[:page], 4 #Max page
+    assert_equal 4, session[:page] #Max page
     get page_path(0)
     assert_response :redirect
-    assert_equal session[:page], 1  #Min page
+    assert_equal 1, session[:page]  #Min page
     get page_path(-3)
     assert_response :redirect
-    assert_equal session[:page], 1  #Min page
+    assert_equal 1, session[:page]  #Min page
   end
 end

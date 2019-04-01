@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RestaurantsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @restaurant = restaurants(:one)
+    @restaurant = restaurants(:unique)
   end
 
   test "should get index" do
@@ -16,8 +16,9 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create restaurant" do
+    @restaurant.name = "Something different"
     assert_difference('Restaurant.count') do
-      post restaurants_url, params: { restaurant: { city: @restaurant.city, cuisine: @restaurant.cuisine, name: @restaurant.name, postcode: @restaurant.postcode, state: @restaurant.state, street_address: @restaurant.street_address, will_split: @restaurant.will_split, wont_split: @restaurant.wont_split } }
+      post restaurants_url, params: { restaurant: { city: @restaurant.city, cuisine: @restaurant.cuisine, name: @restaurant.name, postcode: @restaurant.postcode, state: @restaurant.state, street_address: @restaurant.street_address} }
     end
 
     assert_redirected_to restaurant_url(Restaurant.last)

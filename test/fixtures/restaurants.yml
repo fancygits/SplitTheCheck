@@ -1,21 +1,35 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  cuisine: MyString
-  street_address: MyString
-  city: MyString
-  state: MyString
-  postcode: MyString
-  will_split: 1
-  wont_split: 1
+  name: Test Restaurant
+  cuisine: Food
+  street_address: 123 Fake St
+  city: Falseville
+  state: KY
+  postcode: 68343
 
 two:
   name: MyString
   cuisine: MyString
   street_address: MyString
   city: MyString
-  state: MyString
+  state: Il
   postcode: MyString
-  will_split: 1
-  wont_split: 1
+
+unique:
+  name: Unique New York
+  cuisine: Pan-Asian-South-American
+  street_address: 45.6 S 45th st
+  city: New York
+  state: NY
+  postcode: 38437
+
+<% 30.times do |i| %>
+fix_<%= i %>:
+  name: New Restaurant \#<%= i %>
+  cuisine: American
+  street_address: 123<%= i %> N Place St
+  city: Los Angelos
+  state: CA
+  postcode: 90210
+<% end %>

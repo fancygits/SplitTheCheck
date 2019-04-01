@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class RestaurantTest < ActiveSupport::TestCase
+# Test Validation
   test "restaurant attributes must not be empty" do
     r = Restaurant.new
     assert r.invalid?
@@ -48,6 +49,81 @@ class RestaurantTest < ActiveSupport::TestCase
     r.name = "Unique New York"
     assert r.invalid?
     assert r.errors[:name].any?
+  end
+
+# Test Search Functionality
+  test "search returns a restaurant" do
+    r = Restaurant.search("Unique")
+    assert r.count > 0
+  end
+
+  test "search returns lots of restaurants" do
+    r = Restaurant.search("New Restaurant")
+    assert r.count > 0
+    assert_equal 30, r.count
+  end
+
+  test "search finds restaurant names" do
+    r = Restaurant.search("Unique New York")
+    assert r.count == 1
+    assert_equal "Unique New York", r.first.name
+  end
+
+  test "search finds restaurant cuisine" do
+    restaurants = Restaurant.search("American")
+    assert_equal 30, restaurants.count
+    restaurants.each do |restaurant|
+      assert_equal "American", restaurant.cuisine
+    end
+  end
+
+  test "search finds restaurant city" do
+    r = Restaurant.search("Falsevi")
+    assert_equal 1, r.count
+    assert_equal "Falseville", r.first.city
+  end
+
+  test "search finds restaurant state" do
+    r = Restaurant.search("ky")
+    assert_equal 1, r.count
+    assert_equal "KY", r.first.state
+  end
+
+  test "search finds restaurant postcode" do
+    restaurants = Restaurant.search("90210")
+    assert_equal 30, restaurants.count
+    restaurants.each do |restaurant|
+      assert_equal "90210", restaurant.postcode
+    end
+  end
+
+  test "search uses wildcards before and after terms" do
+    r = Restaurant.search("e")
+    assert_equal 32, r.count
+  end
+
+  test "search throws a StandardError on no results" do
+    err = assert_raises(StandardError) do
+      r = Restaurant.search("ZZYZX")
+    end
+    assert_equal "Searching for \"ZZYZX\" yielded no results.", err.message
+  end
+
+# Test Voting Functionality
+  test "vote(will_split) increases will_split by one" do
+    r = restaurants(:one)
+    assert_equal 0, r.will_split
+    r.vote("will_split")
+    assert_equal 1, r.will_split
+  end
+
+  test "vote(wont_split) increases wont_split by one, twice" do
+    r = restaurants(:one)
+    assert_equal 0, r.wont_split
+    r.vote("wont_split")
+    assert_equal 1, r.wont_split
+    r.vote("wont_split")
+    assert_equal 2, r.wont_split
   end
 
 end

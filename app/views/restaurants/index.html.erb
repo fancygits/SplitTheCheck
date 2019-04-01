@@ -6,16 +6,23 @@
 </aside>
 <% end %>
 
+<nav>
+  <ul class="pagination">
+    <%= content_tag :li, class: "page-item #{'disabled' if @page == 1}" do %>
+      <%= link_to 'First', page_path(1), class: "page-link" %>
+    <% end %>
+    <%= content_tag :li, class: "page-item #{'disabled' if @page <= 1}" do %>
+      <%= link_to 'Previous 10', page_path(@page - 1), class: "page-link" %>
+    <% end %>
+    <%= content_tag :li, class: "page-item #{'disabled' if @page >= @total_pages}" do %>
+      <%= link_to 'Next 10', page_path(@page + 1), class: "page-link" %>
+    <% end %>
+    <%= content_tag :li, class: "page-item #{'disabled' if @page >= @total_pages}" do %>
+      <%= link_to 'Last', page_path(@total_pages), class: "page-link" %>
+    <% end %>
+  </ul>
+</nav>
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Cuisine</th>
-      <th>Address</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
   <tbody>
     <% @restaurants.each do |restaurant| %>
       <tr>

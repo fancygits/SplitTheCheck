@@ -1,7 +1,8 @@
 class Restaurant < ApplicationRecord
+  validates :name, :cuisine, :street_address, :city, :state, :postcode, presence: true
+  validates :name, uniqueness: true
+  validates :state, length: { is: 2 }, format: { with: /\A[A-Z]+\z/, message: "only uppercase letters"}
 
-  class Error < StandardError
-  end
 
   # Searches the database for similar names or returns all
   def self.search(search)
@@ -27,11 +28,10 @@ class Restaurant < ApplicationRecord
   # Increases the will_split or wont_split vote by 1
   def vote(split)
     if split == 'wont_split'
-      self.wont_split += 1
+      self.increment!(:wont_split, 1)
     elsif split == 'will_split'
-      self.will_split += 1
+      self.increment!(:will_split, 1)
     end
-    self.save
   end
 
 end

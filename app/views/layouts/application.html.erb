@@ -48,34 +48,5 @@
       </main>
     </section>
 
-    <nav>
-      <ul class="pagination">
-        <%= content_tag :li, class: "page-item #{'disabled' if @page == 1}" do %>
-          <%= link_to 'First', page_path(1), class: "page-link" %>
-        <% end %>
-        <%= content_tag :li, class: "page-item #{'disabled' if @page <= 1}" do %>
-          <%= link_to 'Previous 10', page_path(@page - 1), class: "page-link" %>
-        <% end %>
-        <%= content_tag :li, class: "page-item #{'disabled' if @page >= @total_pages}" do %>
-          <%= link_to 'Next 10', page_path(@page + 1), class: "page-link" %>
-        <% end %>
-        <%= content_tag :li, class: "page-item #{'disabled' if @page >= @total_pages}" do %>
-          <%= link_to 'Last', page_path(@total_pages), class: "page-link" %>
-        <% end %>
-      </ul>
-    </nav>
-
-    <footer">
-      <div id="debug">
-        <p><%= "You searched for #{session[:search]}." %></p>
-        <p><%= "You are on page #{@page} out of #{@total_pages}."%></p>
-        <p>You've voted for these restaurants:</p>
-        <ul>
-          <% @votes.each do |vote| %>
-            <li><%= vote %></li>
-          <% end %>
-        <ul>
-      </div>
-    </footer>
   </body>
 </html>

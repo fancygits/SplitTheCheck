@@ -1,5 +1,9 @@
 <% if notice %>
-<aside id="notice"><%= notice %></aside>
+<aside id="notice" class="alert alert-dismissable alert-warning">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4 class="alert-heading">Oops</h4>
+  <p class="mb-0"><%= notice %></p>
+</aside>
 <% end %>
 
 <table>
@@ -21,27 +25,27 @@
           #{restaurant.state}  #{restaurant.postcode}" %></td>
         <td>
           <% unless @votes.include? restaurant.name %>
-            <%= button_to vote_restaurant_path(restaurant, :split => 'will_split'),
-                  {class: "hvr-icon-bob hvr-shutter-out-horizontal", method: :put} do %>
+            <%= link_to vote_restaurant_path(restaurant, :split => 'will_split'),
+                  {class: "hvr-icon-bob hvr-shutter-out-horizontal btn btn-md", method: :put} do %>
               <i class="fas fa-thumbs-up hvr-icon"></i>
               <%= restaurant.will_split %><br> Will Split
             <% end %>
         </td>
         <td>
-            <%= button_to vote_restaurant_path(restaurant, :split => 'wont_split'),
-                  class: "hvr-icon-hang hvr-shutter-in-horizontal ", method: :put do %>
+            <%= link_to vote_restaurant_path(restaurant, :split => 'wont_split'),
+                  class: "hvr-icon-hang hvr-shutter-in-horizontal btn btn-md", method: :put do %>
               <i class="fas fa-thumbs-down hvr-icon"></i>
               <%= restaurant.wont_split %><br> Won't Split
             <% end %>
 
           <% else %>
-            <%= button_tag '#', {class: "disabled will", disabled: true} do %>
+            <%= link_to '#', {class: "disabled will btn btn-md btn-outline-success", disabled: true} do %>
               <i class="fas fa-thumbs-up"></i>
               <%= restaurant.will_split %><br> Will Split
             <% end %>
         </td>
         <td>
-            <%= button_tag '#', {class: "disabled wont", disabled: true} do %>
+            <%= link_to '#', {class: "disabled wont btn btn-md btn-outline-primary", disabled: true} do %>
               <i class="fas fa-thumbs-down"></i>
               <%= restaurant.wont_split %><br> Won't Split
             <% end %>
@@ -51,3 +55,35 @@
     <% end %>
   </tbody>
 </table>
+
+<nav>
+  <ul class="pagination">
+    <%= content_tag :li, class: "page-item #{'disabled' if @page == 1}" do %>
+      <%= link_to 'First', page_path(1), class: "page-link" %>
+    <% end %>
+    <%= content_tag :li, class: "page-item #{'disabled' if @page <= 1}" do %>
+      <%= link_to 'Previous 10', page_path(@page - 1), class: "page-link" %>
+    <% end %>
+    <%= content_tag :li, class: "page-item #{'disabled' if @page >= @total_pages}" do %>
+      <%= link_to 'Next 10', page_path(@page + 1), class: "page-link" %>
+    <% end %>
+    <%= content_tag :li, class: "page-item #{'disabled' if @page >= @total_pages}" do %>
+      <%= link_to 'Last', page_path(@total_pages), class: "page-link" %>
+    <% end %>
+  </ul>
+</nav>
+
+<footer class="footer alert alert-dismissable alert-light">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4 class="alert-heading">Debug</h4>
+    <% if session[:search] %>
+      <p><%= "You searched for #{session[:search]}." %></p>
+    <% end %>
+    <p><%= "You are on page #{@page} out of #{@total_pages}."%></p>
+    <ul class="list-inline">
+      You've voted for these restaurants:
+      <% @votes.each do |vote| %>
+        <li class="list-inline-item"><%= vote %></li>
+      <% end %>
+    <ul>
+</footer>

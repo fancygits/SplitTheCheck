@@ -8,12 +8,11 @@ class RestaurantsController < ApplicationController
   # GET /restaurants
   # GET /restaurants.json
   def index
-    # @restaurants = Restaurant.all
-    @page = session[:page].to_i
     if params[:search]
       session[:page] = 1
       session[:search] = params[:search]
     end
+    @page = session[:page].to_i
     @restaurants = Restaurant.order('name').search(session[:search]).limit(10).offset((@page - 1) * 10)
     get_total_pages
     @total_pages = session[:total_pages]

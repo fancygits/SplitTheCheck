@@ -43,6 +43,20 @@
 
     </nav>
     <section class="content">
+      <% if notice %>
+      <aside id="notice" class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading">Thanks</h4>
+        <p class="mb-0"><%= notice %></p>
+      </aside>
+      <% end %>
+      <% if alert %>
+      <aside id="notice" class="alert alert-dismissable alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading">Oops</h4>
+        <p class="mb-0"><%= notice %></p>
+      </aside>
+      <% end %>
       <main class='<%= controller.controller_name %>'>
         <%= yield %>
       </main>

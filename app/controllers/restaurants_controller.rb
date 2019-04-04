@@ -109,9 +109,10 @@ end
     end
 
     def no_results
-      logger.error "Search term \"#{params[:search]}\" yielded no results."
-      redirect_to root_path, notice: "Search term \"#{params[:search]}\" yielded no results."
       session.delete(:search)
+      logger.error "*** Search term \"#{params[:search]}\" yielded no results. ***"
+      redirect_to root_path, notice: "Search term \"#{params[:search]}\" yielded no results."
+
     end
 
     # Use callbacks to share common setup or constraints between actions.

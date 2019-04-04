@@ -16,8 +16,20 @@
   </head>
 
   <body>
-    <small class="navbar navbar-expand-lg navbar-dark bg-primary">
-      The best places to eat, when you don't want to treat!</small>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <strong class="mr-auto">
+        The best places to eat, when you don't want to treat!</strong>
+      <span class="navbar-text pull-right mr-lg-0">
+        <% if user_signed_in? %>
+          Logged in as <strong><%= current_user.email %></strong>
+          <%= link_to "Edit profile", edit_user_registration_path, :class => 'navbar-link' %> |
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
+        <% else %>
+          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> |
+          <%= link_to "Login", new_user_session_path, :class => 'navbar-link' %>
+        <% end %>
+      </span>
+    </nav>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <h2><%= link_to 'SplitTheCheck', clear_path, class: "text-white nav-link" %></h2>
 

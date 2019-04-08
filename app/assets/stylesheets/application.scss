@@ -14,6 +14,8 @@
  *= require_self
  */
 
-form.edit {
-  width: 60%;
+form {
+  @media(min-width: 30em) {
+    width: 60%;
+  }
 }

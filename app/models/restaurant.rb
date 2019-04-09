@@ -1,4 +1,5 @@
 class Restaurant < ApplicationRecord
+  has_many :votes
   validates :name, :cuisine, :street_address, :city, :state, :postcode, presence: true
   validates :name, uniqueness: true
   validates :state, length: { is: 2 }, format: { with: /\A[A-Z]+\z/, message: "is only 2 uppercase letters"}

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :votes
   devise_for :users
   resources :restaurants, except: [:destroy] do
     member do

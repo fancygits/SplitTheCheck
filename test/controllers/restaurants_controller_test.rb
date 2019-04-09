@@ -50,6 +50,11 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should not get edit if not signed in" do
+    get edit_restaurant_url(@restaurant)
+    assert_redirected_to new_user_session_path
+  end
+
   test "should update restaurant" do
     sign_in @user
     patch restaurant_url(@restaurant), params: { restaurant: { city: @restaurant.city, cuisine: @restaurant.cuisine, name: @restaurant.name, postcode: @restaurant.postcode, state: @restaurant.state, street_address: @restaurant.street_address, will_split: @restaurant.will_split, wont_split: @restaurant.wont_split } }

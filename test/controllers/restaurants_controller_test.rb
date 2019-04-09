@@ -5,7 +5,7 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
-    @user = users(:one)
+    @user = users(:validUser)
     @restaurant = restaurants(:unique)
   end
 

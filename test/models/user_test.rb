@@ -10,4 +10,62 @@ class UserTest < ActiveSupport::TestCase
     assert u.errors[:password].any?
   end
 
+  test "user email must be in correct format" do
+    u = users(:invalidUser)
+    u.email = "thisisnotavalidemailaddress.com"
+    assert u.invalid?
+    assert u.errors[:username].empty?
+    assert u.errors[:email].any?
+    u.email = "thisisavalidemailaddress@email.com"
+    assert u.valid?
+    assert u.errors[:email].empty?
+  end
+
+  test "username must be in correct format" do
+    u = users(:validUser)
+    assert u.valid?
+    u.username = "Frank Miller!"
+    assert u.invalid?
+    assert u.errors[:username].any?
+    u.username = "frankmiller"
+    assert u.valid?
+    assert u.errors[:username].empty?
+  end
+
+  test "should not allow creating a user with identical email" do
+    u1 = users(:validUser)
+    assert u1.valid?
+    u2 = User.new({
+      username: "secondary_user",
+      email: "valid@user.com",
+      password: "ienaidfhena"
+      })
+    assert u2.invalid?
+    assert u2.errors[:email].any?
+  end
+
+  test "should not allow creating a user with identical username" do
+    u1 = users(:validUser)
+    assert u1.valid?
+    u2 = User.new({
+      username: "valid_user",
+      email: "secondary@email.com",
+      password: "ienaidfhena"
+      })
+    assert u2.invalid?
+    assert u2.errors[:username].any?
+  end
+
+  test "should not allow creating a user with a username of a taken email" do
+    u1 = users(:validUser)
+    u2 = User.new({
+      username: "valid@user.com",
+      email: "user2@test.com",
+      password: "bc123adsf"
+      })
+    assert u1.valid?
+    assert u2.invalid?
+    assert u2.errors[:username].any?
+  end
+
 end

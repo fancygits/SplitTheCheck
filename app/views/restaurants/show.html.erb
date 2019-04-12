@@ -9,7 +9,7 @@
 </p>
 
 <div id="voting_buttons">
-  <% unless @votes.include? @restaurant.name %>
+  <% unless current_user.blank? || current_user.has_voted_for?(@restaurant) %>
     <%= link_to vote_restaurant_path(@restaurant, :split => 'will_split'),
           {class: "hvr-icon-bob hvr-shutter-out-horizontal btn btn-md", method: :put} do %>
       <i class="fas fa-thumbs-up hvr-icon"></i>

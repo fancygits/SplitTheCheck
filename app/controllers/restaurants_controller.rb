@@ -76,14 +76,6 @@ class RestaurantsController < ApplicationController
   # Tells the restaurant to vote
   def vote
     split = params[:split]
-    # # puts split
-    # # puts "****** Current User: " + current_user.username + " ******"
-    # # puts "****** Has voted?: " + current_user.has_voted_for?(@restaurant).to_s + " ******"
-    # unless current_user.has_voted_for?(@restaurant)
-    #   # @restaurant.vote(split)
-    #   # puts "****** Voted?: " + current_user.has_voted_for?(@restaurant).to_s + " ******"
-    #   redirect_back(fallback_location: root_path)
-    # end
     current_user.vote_for(@restaurant, split)
     redirect_back(fallback_location: root_path)
   end

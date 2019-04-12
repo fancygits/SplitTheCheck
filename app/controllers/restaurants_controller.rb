@@ -75,12 +75,17 @@ class RestaurantsController < ApplicationController
 
   # Tells the restaurant to vote
   def vote
-    unless @votes.include? @restaurant.name
-      if @restaurant.vote(params[:split])
-        session[:votes].push @restaurant.name
-        redirect_back(fallback_location: root_path)
-      end
-    end
+    split = params[:split]
+    # # puts split
+    # # puts "****** Current User: " + current_user.username + " ******"
+    # # puts "****** Has voted?: " + current_user.has_voted_for?(@restaurant).to_s + " ******"
+    # unless current_user.has_voted_for?(@restaurant)
+    #   # @restaurant.vote(split)
+    #   # puts "****** Voted?: " + current_user.has_voted_for?(@restaurant).to_s + " ******"
+    #   redirect_back(fallback_location: root_path)
+    # end
+    current_user.vote_for(@restaurant, split)
+    redirect_back(fallback_location: root_path)
   end
 
   def clear_search
@@ -106,6 +111,12 @@ end
         session[:votes] = []
       end
       @votes = session[:votes]
+      # current_user.votes
+      if user_signed_in?
+        current_user.votes.each do |vote|
+          puts vote.restaurant_id.to_s + " : " + vote.split
+        end
+      end
     end
 
     def no_results

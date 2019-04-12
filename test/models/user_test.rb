@@ -68,4 +68,31 @@ class UserTest < ActiveSupport::TestCase
     assert u2.errors[:username].any?
   end
 
+  test "should vote for a restaurant" do
+    user = users(:validUser)
+    r1 = restaurants(:one)
+    r2 = restaurants(:two)
+    user.vote_for(r1, "will")
+    assert_equal 1, user.votes.size
+    user.vote_for(r2, "wont")
+    assert_equal 2, user.votes.size
+  end
+
+  test "should not allow voting for the same restaurant twice" do
+    user = users(:validUser)
+    r1 = restaurants(:one)
+    user.vote_for(r1, "will")
+    assert_equal 1, user.votes.size
+    user.vote_for(r1, "wont")
+    assert_equal 1, user.votes.size
+  end
+
+  test "should check if user has voted" do
+    user = users(:validUser)
+    r = restaurants(:two)
+    assert_equal false, user.has_voted_for?(r)
+    user.vote_for(r, "will")
+    assert user.has_voted_for?(r)
+  end
+
 end

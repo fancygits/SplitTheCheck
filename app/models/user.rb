@@ -8,7 +8,6 @@ class User < ApplicationRecord
   validates :username, presence: :true, uniqueness: { case_sensitive: false }
   validates :username, format: { with: /^[a-zA-Z0-9_\.]*$/, multiline: true,
                                   message: 'can only use letters, numbers, and underscore.' }
-  # validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
   validate :validate_username
 
  # Virtual attribute for authenticating by either username or email
@@ -32,6 +31,19 @@ class User < ApplicationRecord
   def validate_username
     if User.where(email: username).exists?
       errors.add(:username, :invalid)
+    end
+  end
+
+  def has_voted_for?(restaurant)
+    self.votes.find_by(restaurant_id: restaurant.id).present?
+  end
+
+  def vote_for(restaurant, split)
+    unless has_voted_for?(restaurant)
+      self.transaction do
+        self.votes.create(restaurant_id: restaurant.id, split: split)
+        restaurant.vote(split)
+      end
     end
   end
 

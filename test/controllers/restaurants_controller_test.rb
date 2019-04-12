@@ -81,13 +81,15 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'tr', 10
   end
 
-  test "should vote and add to votes array" do
+  test "should vote and add to user's votes" do
     sign_in @user
     get restaurant_url(@restaurant)
-    assert_equal 0, session[:votes].count
     assert_equal 0, @restaurant.will_split
-    put vote_restaurant_path(@restaurant), params: { split: "will_split" }
-    assert_equal 1, session[:votes].count
+    assert_equal false, @user.has_voted_for?(@restaurant)
+    assert_difference('@restaurant.votes.count') do
+      put vote_restaurant_path(@restaurant), params: { split: "will_split" }
+    end
+    assert @user.has_voted_for?(@restaurant)
   end
 
   test "should not allow voting if not signed in" do

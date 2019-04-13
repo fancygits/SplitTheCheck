@@ -72,17 +72,8 @@
   </ul>
 </nav>
 
-<footer class="footer alert alert-dismissable alert-light">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <h4 class="alert-heading">Debug</h4>
-    <% if session[:search] %>
-      <p><%= "You searched for #{session[:search]}." %></p>
-    <% end %>
-    <p><%= "You are on page #{@page} out of #{@total_pages}."%></p>
-    <ul class="list-inline">
-      You've voted for these restaurants:
-      <% @votes.each do |vote| %>
-        <li class="list-inline-item"><%= vote %></li>
-      <% end %>
-    <ul>
+<footer class="card border-primary">
+  <div class="card-body text-center">
+    <p class="card-text text-muted">Created by <a href="mailto:jjohn144@my.westga.edu" class="card-link">James Luke Johnson</a> for CS6242.</p>
+  </div>
 </footer>

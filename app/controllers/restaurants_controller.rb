@@ -1,6 +1,6 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :vote, :already_voted]
-  before_action :get_votes
+  # before_action :get_votes
   before_action :get_total_pages, only: [:index]
   before_action :get_search_term, only: [:index]
   rescue_from StandardError, with: :no_results
@@ -98,18 +98,13 @@ rescue_from 'ActiveRecord::RecordNotFound' do |exception|
 end
 
   private
-    def get_votes
-      if session[:votes].nil?
-        session[:votes] = []
-      end
-      @votes = session[:votes]
-      # current_user.votes
-      if user_signed_in?
-        current_user.votes.each do |vote|
-          puts vote.restaurant_id.to_s + " : " + vote.split
-        end
-      end
-    end
+    # def get_votes
+    #   if user_signed_in?
+    #     current_user.votes.each do |vote|
+    #       @votes = vote.restaurant_id.to_s + " : " + vote.split
+    #     end
+    #   end
+    # end
 
     def no_results
       session.delete(:search)

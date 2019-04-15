@@ -1,41 +1,16 @@
-<h1>
+<h1 class="d-inline">
+  <% restaurant = @restaurant %>
   <%= @restaurant.name %>
   <%= content_tag :small, "#{@restaurant.cuisine}", class: "text-muted" %>
+
 </h1>
+<h6 class="d-inline">
+  <%= link_to 'Edit', edit_restaurant_path(@restaurant), class: "small text-muted" %>
+</h6>
 
 <p class="lead">
 <%= "#{@restaurant.street_address}, #{@restaurant.city},
   #{@restaurant.state}  #{@restaurant.postcode}" %>
 </p>
 
-<div id="voting_buttons">
-  <% unless current_user.blank? || current_user.has_voted_for?(@restaurant) %>
-    <%= link_to vote_restaurant_path(@restaurant, :split => 'will_split'),
-          {class: "hvr-icon-bob hvr-shutter-out-horizontal btn btn-md", method: :put} do %>
-      <i class="fas fa-thumbs-up hvr-icon"></i>
-      <%= @restaurant.will_split %><br> Will Split
-    <% end %>
-
-    <%= link_to vote_restaurant_path(@restaurant, :split => 'wont_split'),
-          class: "hvr-icon-hang hvr-shutter-in-horizontal btn btn-md", method: :put do %>
-      <i class="fas fa-thumbs-down hvr-icon"></i>
-      <%= @restaurant.wont_split %><br> Won't Split
-    <% end %>
-
-  <% else %>
-    <%= link_to '#', {class: "disabled will btn btn-md btn-outline-success", disabled: true} do %>
-      <i class="fas fa-thumbs-up"></i>
-      <%= @restaurant.will_split %><br> Will Split
-    <% end %>
-
-    <%= link_to '#', {class: "disabled wont btn btn-md btn-outline-primary", disabled: true} do %>
-      <i class="fas fa-thumbs-down"></i>
-      <%= @restaurant.wont_split %><br> Won't Split
-    <% end %>
-  <% end %>
-</div>
-<p></p>
-<p>
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', root_path %>
-</p>
+<%= render "votebuttons", restaurant: @restaurant %>

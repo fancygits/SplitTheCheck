@@ -23,32 +23,7 @@
         <td><%= "#{restaurant.street_address}, #{restaurant.city},
           #{restaurant.state}  #{restaurant.postcode}" %></td>
         <td>
-          <% unless current_user.blank? || current_user.has_voted_for?(restaurant) %>
-            <%= link_to vote_restaurant_path(restaurant, :split => 'will_split'),
-                  class: "hvr-icon-bob hvr-shutter-out-horizontal btn btn-md", method: :put do %>
-              <i class="fas fa-thumbs-up hvr-icon"></i>
-              <%= restaurant.will_split %><br> Will Split
-            <% end %>
-        </td>
-        <td>
-            <%= link_to vote_restaurant_path(restaurant, :split => 'wont_split'),
-                  class: "hvr-icon-hang hvr-shutter-in-horizontal btn btn-md", method: :put do %>
-              <i class="fas fa-thumbs-down hvr-icon"></i>
-              <%= restaurant.wont_split %><br> Won't Split
-            <% end %>
-
-          <% else %>
-            <%= link_to '#', {class: "disabled will btn btn-md btn-outline-success", disabled: true} do %>
-              <i class="fas fa-thumbs-up"></i>
-              <%= restaurant.will_split %><br> Will Split
-            <% end %>
-        </td>
-        <td>
-            <%= link_to '#', {class: "disabled wont btn btn-md btn-outline-primary", disabled: true} do %>
-              <i class="fas fa-thumbs-down"></i>
-              <%= restaurant.wont_split %><br> Won't Split
-            <% end %>
-          <% end %>
+          <%= render "votebuttons", restaurant: restaurant %>
         </td>
       </tr>
     <% end %>

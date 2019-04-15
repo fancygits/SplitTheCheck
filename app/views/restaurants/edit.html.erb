@@ -1,6 +1,4 @@
-<%= content_tag(:h1,"Editing #{@restaurant.name}") %>
+<%= content_tag(:h1,"Editing #{@restaurant.name}", class: 'd-inline') %>
+<%= link_to 'Show', @restaurant, class: 'd-inline' %>
 
 <%= render 'form', restaurant: @restaurant %>
-
-<%= link_to 'Show', @restaurant %> |
-<%= link_to 'Back', root_path %>

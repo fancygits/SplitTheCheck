@@ -1,0 +1,5 @@
+<% address = URI.encode("#{@restaurant.street_address}, #{@restaurant.city}, #{@restaurant.state}") %>
+<% name = URI.encode("#{@restaurant.name}") %>
+<% src = "https://maps.google.com/maps?width=500&amp;height=400&amp;hl=en&amp;q=#{address}+(#{name})&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" %>
+
+<%= content_tag(:iframe, '', src: src, width: 500, height: 400, frameborder: 0, scrolling: 'no', marginwidth: 0, marginheight: 0) %>

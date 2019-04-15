@@ -40,8 +40,8 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     get restaurant_url(@restaurant)
     assert_response :success
     assert_select 'h1', 1
-    assert_select 'div#voting_buttons', 1
-    assert_select 'div#voting_buttons a', 2
+    assert_select "div##{@restaurant.id}voting_buttons", 1
+    assert_select "div##{@restaurant.id}voting_buttons a", 2
   end
 
   test "should get edit" do

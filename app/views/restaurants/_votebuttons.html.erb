@@ -8,7 +8,8 @@ Render buttons to vote on a restaurant
 
 %>
 
-<div id="voting_buttons">
+
+<%= content_tag :div, id: "#{restaurant.id}voting_buttons" do %>
 
   <% unless current_user.blank? || current_user.has_voted_for?(restaurant) %>
     <%= link_to vote_restaurant_path(restaurant, :split => 'will_split'),
@@ -34,4 +35,4 @@ Render buttons to vote on a restaurant
       <%= restaurant.wont_split %><br> Won't Split
     <% end %>
   <% end %>
-</div>
+<% end %>

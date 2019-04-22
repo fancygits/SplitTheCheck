@@ -1,6 +1,6 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :vote, :already_voted]
-  # before_action :get_votes
+  before_action :authorize, only: [:new, :update, :vote]
   before_action :get_total_pages, only: [:index]
   before_action :get_search_term, only: [:index]
   rescue_from StandardError, with: :no_results
@@ -107,10 +107,12 @@ end
     # end
 
     def no_results
+      unless params[:search].blank? || session[:search].blank?
+        logger.error "*** Search term \"#{params[:search]}\" yielded no results. ***"
+        flash[:notice] = "Search term \"#{params[:search]}\" yielded no results."
+      end
       session.delete(:search)
-      logger.error "*** Search term \"#{params[:search]}\" yielded no results. ***"
-      redirect_to root_path, notice: "Search term \"#{params[:search]}\" yielded no results."
-
+      redirect_to root_path
     end
 
     # Use callbacks to share common setup or constraints between actions.
@@ -133,5 +135,13 @@ end
 
     def get_total_pages
       session[:total_pages] = (Restaurant.search(session[:search]).count / 10.0).ceil
+    end
+
+    protected
+
+    def authorize
+      unless user_signed_in?
+        redirect_to new_user_session_path, alert: "You need to sign in or sign up before continuing."
+      end
     end
 end

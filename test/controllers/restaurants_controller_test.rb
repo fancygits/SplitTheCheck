@@ -16,9 +16,15 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'h2', 'SplitTheCheck'
   end
 
-  test "should get new" do
+  test "should get new if signed in" do
+    sign_in @user
     get new_restaurant_url
     assert_response :success
+  end
+
+  test "should not get new unless signed in" do
+    get new_restaurant_url
+    assert_redirected_to new_user_session_path
   end
 
   test "should create restaurant" do

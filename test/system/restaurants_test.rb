@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 class RestaurantsTest < ApplicationSystemTestCase
-  driven_by :selenium, using: :headless_chrome
+  driven_by :selenium, using: :firefox
 
   include Warden::Test::Helpers
 
@@ -15,10 +15,9 @@ class RestaurantsTest < ApplicationSystemTestCase
     assert_selector "h2", text: "SplitTheCheck"
   end
 
-  test "user is directed to sign in page when creating a restaurant" do
+  test "user is directed to sign in page before creating a restaurant" do
     visit restaurants_url
     click_on "Add a Restaurant"
-    click_on "Create Restaurant"
     assert_selector "h4", text: "Alert"
     assert_text "You need to sign in or sign up before continuing."
   end

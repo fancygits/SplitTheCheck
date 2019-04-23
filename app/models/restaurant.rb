@@ -26,13 +26,12 @@ class Restaurant < ApplicationRecord
     end
   end
 
-  # Increases the will_split or wont_split vote by 1
-  def vote(split)
-    if split == 'wont_split'
-      self.increment!(:wont_split, 1)
-    elsif split == 'will_split'
-      self.increment!(:will_split, 1)
-    end
+  def will_split
+    self.votes.where(split: 'will_split').count
+  end
+
+  def wont_split
+    self.votes.where(split: 'wont_split').count
   end
 
 end

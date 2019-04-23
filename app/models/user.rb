@@ -40,10 +40,7 @@ class User < ApplicationRecord
 
   def vote_for(restaurant, split)
     unless has_voted_for?(restaurant)
-      self.transaction do
-        self.votes.create(restaurant_id: restaurant.id, split: split)
-        restaurant.vote(split)
-      end
+      self.votes.create(restaurant_id: restaurant.id, split: split)
     end
   end
 

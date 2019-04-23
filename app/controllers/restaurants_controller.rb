@@ -98,13 +98,6 @@ rescue_from 'ActiveRecord::RecordNotFound' do |exception|
 end
 
   private
-    # def get_votes
-    #   if user_signed_in?
-    #     current_user.votes.each do |vote|
-    #       @votes = vote.restaurant_id.to_s + " : " + vote.split
-    #     end
-    #   end
-    # end
 
     def no_results
       unless params[:search].blank? || session[:search].blank?

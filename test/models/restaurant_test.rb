@@ -109,21 +109,4 @@ class RestaurantTest < ActiveSupport::TestCase
     assert_equal "Searching for \"ZZYZX\" yielded no results.", err.message
   end
 
-# Test Voting Functionality
-  test "vote(will_split) increases will_split by one" do
-    r = restaurants(:one)
-    assert_equal 0, r.will_split
-    r.vote("will_split")
-    assert_equal 1, r.will_split
-  end
-
-  test "vote(wont_split) increases wont_split by one, twice" do
-    r = restaurants(:one)
-    assert_equal 0, r.wont_split
-    r.vote("wont_split")
-    assert_equal 1, r.wont_split
-    r.vote("wont_split")
-    assert_equal 2, r.wont_split
-  end
-
 end

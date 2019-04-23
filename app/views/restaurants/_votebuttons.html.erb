@@ -8,31 +8,32 @@ Render buttons to vote on a restaurant
 
 %>
 
-
+<% will_split = restaurant.will_split %>
+<% wont_split = restaurant.wont_split %>
 <%= content_tag :div, id: "#{restaurant.id}voting_buttons" do %>
 
   <% unless current_user.blank? || current_user.has_voted_for?(restaurant) %>
     <%= link_to vote_restaurant_path(restaurant, :split => 'will_split'),
           {class: "hvr-icon-bob hvr-shutter-out-horizontal btn btn-md", method: :put} do %>
       <i class="fas fa-thumbs-up hvr-icon"></i>
-      <%= restaurant.will_split %><br> Will Split
+      <%= will_split %><br> Will Split
     <% end %>
 
     <%= link_to vote_restaurant_path(restaurant, :split => 'wont_split'),
           class: "hvr-icon-hang hvr-shutter-in-horizontal btn btn-md", method: :put do %>
       <i class="fas fa-thumbs-down hvr-icon"></i>
-      <%= restaurant.wont_split %><br> Won't Split
+      <%= wont_split %><br> Won't Split
     <% end %>
 
   <% else %>
     <%= link_to '#', {class: "disabled will btn btn-md btn-outline-success", disabled: true} do %>
       <i class="fas fa-thumbs-up"></i>
-      <%= restaurant.will_split %><br> Will Split
+      <%= will_split %><br> Will Split
     <% end %>
 
     <%= link_to '#', {class: "disabled wont btn btn-md btn-outline-primary", disabled: true} do %>
       <i class="fas fa-thumbs-down"></i>
-      <%= restaurant.wont_split %><br> Won't Split
+      <%= wont_split %><br> Won't Split
     <% end %>
   <% end %>
 <% end %>

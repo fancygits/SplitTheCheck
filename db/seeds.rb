@@ -7,9 +7,7 @@ Restaurant.create!( name: 'Bad Apple',
                     street_address: '4300 N Lincoln Ave',
                     city: 'Chicago',
                     state: 'IL',
-                    postcode: '60618',
-                    will_split: 2,
-                    wont_split: 0 )
+                    postcode: '60618')
 csv_text = File.read(Rails.root.join('lib', 'restaurants.csv'))
 csv = CSV.parse(csv_text, :headers => true)
 csv.each do |row|
@@ -20,8 +18,6 @@ csv.each do |row|
   r.city = row['city']
   r.state = row['state']
   r.postcode = row['postcode']
-  r.will_split = row['will_split']
-  r.wont_split = row['wont_split']
   r.save
 end
 puts "There are now #{Restaurant.count} rows in the restaurant table."

@@ -95,4 +95,32 @@ class UserTest < ActiveSupport::TestCase
     assert user.has_voted_for?(r)
   end
 
+  test "should favorite a restaurant" do
+    user = users(:validUser)
+    r1 = restaurants(:one)
+    assert_equal false, user.has_favorited?(r1)
+    user.favorite(r1)
+    assert_equal 1, user.favorites.size
+  end
+
+  test "should unfavorite the same restaurant" do
+    user = users(:validUser)
+    r1 = restaurants(:one)
+    assert_equal false, user.has_favorited?(r1)
+    user.favorite(r1)
+    assert_equal 1, user.favorites.size
+    assert user.has_favorited?(r1)
+    user.favorite(r1)
+    assert_equal false, user.has_favorited?(r1)
+    assert_equal 0, user.favorites.size
+  end
+
+  test "should check if user has favorited" do
+    user = users(:validUser)
+    r = restaurants(:two)
+    assert_equal false, user.has_favorited?(r)
+    user.favorite(r)
+    assert user.has_favorited?(r)
+  end
+
 end

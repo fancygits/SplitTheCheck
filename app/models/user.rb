@@ -45,4 +45,17 @@ class User < ApplicationRecord
     end
   end
 
+  def has_favorited?(restaurant)
+    self.favorites.find_by(restaurant_id: restaurant.id).present?
+  end
+
+  def favorite(restaurant)
+    fav = self.favorites.find_by(restaurant_id: restaurant.id)
+    if fav.present?
+      fav.destroy
+    else
+      self.favorites.create(restaurant_id: restaurant.id)
+    end
+  end
+
 end

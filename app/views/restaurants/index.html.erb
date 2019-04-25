@@ -18,6 +18,9 @@
   <tbody>
     <% @restaurants.each do |restaurant| %>
       <tr>
+        <td>
+          <%= render "favoritestar", restaurant: restaurant %>
+        </td>
         <td><%= link_to restaurant.name, restaurant %></td>
         <td><%= restaurant.cuisine %></td>
         <td><%= "#{restaurant.street_address}, #{restaurant.city},

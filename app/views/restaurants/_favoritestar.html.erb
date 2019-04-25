@@ -1,0 +1,18 @@
+<%#
+
+Favorite Star
+
+Render a star to favorite on a restaurant
+
+@param restaurant [Restaurant] The restaurant to favorite
+
+%>
+<% unless current_user.blank? %>
+  <%= link_to favorite_restaurant_path(restaurant), class: "hvr-icon-fade", method: :put do %>
+    <% unless current_user.has_favorited?(restaurant) %>
+      <svg class="icon icon-star-empty hvr-icon"><use xlink:href="#icon-star-empty"></use></svg>
+    <% else %>
+      <svg class="icon icon-star-full hvr-icon"><use xlink:href="#icon-star-full"></use></svg>
+    <% end %>
+  <% end %>
+<% end %>

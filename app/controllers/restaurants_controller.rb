@@ -1,6 +1,6 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:show, :edit, :update, :vote, :already_voted]
-  before_action :authorize, only: [:new, :update, :vote]
+  before_action :set_restaurant, only: [:show, :edit, :update, :vote, :favorite]
+  before_action :authorize, only: [:new, :update, :vote, :edit, :favorite]
   before_action :get_total_pages, only: [:index]
   before_action :get_search_term, only: [:index]
   rescue_from StandardError, with: :no_results
@@ -77,6 +77,12 @@ class RestaurantsController < ApplicationController
   def vote
     split = params[:split]
     current_user.vote_for(@restaurant, split)
+    redirect_back(fallback_location: root_path)
+  end
+
+  # Favorites a restaurant
+  def favorite
+    current_user.favorite(@restaurant)
     redirect_back(fallback_location: root_path)
   end
 

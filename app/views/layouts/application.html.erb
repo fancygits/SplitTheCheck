@@ -7,7 +7,6 @@
 
 
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/journal/bootstrap.min.css" rel="stylesheet" integrity="sha384-ciphE0NCAlD2/N6NUApXAN2dAs/vcSAOTzyE202jJx3oS8n4tAQezRgnlHqcJ59C" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -16,12 +15,35 @@
   </head>
 
   <body>
+    <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <defs>
+        <symbol id="icon-star-empty" viewBox="0 0 26 28">
+          <title>star-empty</title>
+          <path d="M17.766 15.687l4.781-4.641-6.594-0.969-2.953-5.969-2.953 5.969-6.594 0.969 4.781 4.641-1.141 6.578 5.906-3.109 5.891 3.109zM26 10.109c0 0.281-0.203 0.547-0.406 0.75l-5.672 5.531 1.344 7.812c0.016 0.109 0.016 0.203 0.016 0.313 0 0.422-0.187 0.781-0.641 0.781-0.219 0-0.438-0.078-0.625-0.187l-7.016-3.687-7.016 3.687c-0.203 0.109-0.406 0.187-0.625 0.187-0.453 0-0.656-0.375-0.656-0.781 0-0.109 0.016-0.203 0.031-0.313l1.344-7.812-5.688-5.531c-0.187-0.203-0.391-0.469-0.391-0.75 0-0.469 0.484-0.656 0.875-0.719l7.844-1.141 3.516-7.109c0.141-0.297 0.406-0.641 0.766-0.641s0.625 0.344 0.766 0.641l3.516 7.109 7.844 1.141c0.375 0.063 0.875 0.25 0.875 0.719z"></path>
+        </symbol>
+
+        <symbol id="icon-star-full" viewBox="0 0 26 28">
+          <title>star-full</title>
+          <path d="M26 10.109c0 0.281-0.203 0.547-0.406 0.75l-5.672 5.531 1.344 7.812c0.016 0.109 0.016 0.203 0.016 0.313 0 0.406-0.187 0.781-0.641 0.781-0.219 0-0.438-0.078-0.625-0.187l-7.016-3.687-7.016 3.687c-0.203 0.109-0.406 0.187-0.625 0.187-0.453 0-0.656-0.375-0.656-0.781 0-0.109 0.016-0.203 0.031-0.313l1.344-7.812-5.688-5.531c-0.187-0.203-0.391-0.469-0.391-0.75 0-0.469 0.484-0.656 0.875-0.719l7.844-1.141 3.516-7.109c0.141-0.297 0.406-0.641 0.766-0.641s0.625 0.344 0.766 0.641l3.516 7.109 7.844 1.141c0.375 0.063 0.875 0.25 0.875 0.719z"></path>
+        </symbol>
+
+        <symbol id="icon-thumbs-down" viewBox="0 0 25 28">
+          <title>thumbs-down</title>
+          <path d="M4 9c0 0.547-0.453 1-1 1-0.562 0-1-0.453-1-1 0-0.562 0.438-1 1-1 0.547 0 1 0.438 1 1zM6.5 17v-10c0-0.547-0.453-1-1-1h-4.5c-0.547 0-1 0.453-1 1v10c0 0.547 0.453 1 1 1h4.5c0.547 0 1-0.453 1-1zM24.141 14.672c0.531 0.594 0.859 1.5 0.859 2.328-0.016 1.625-1.375 3-3 3h-4.328c0.125 0.5 0.281 0.656 0.453 1 0.406 0.812 0.875 1.719 0.875 3 0 1.203 0 4-3.5 4-0.266 0-0.516-0.109-0.703-0.297-0.672-0.656-0.859-1.625-1.031-2.547-0.187-0.906-0.359-1.844-0.969-2.453-0.484-0.484-1.016-1.156-1.578-1.875-0.688-0.906-2.188-2.766-2.766-2.812-0.516-0.047-0.953-0.484-0.953-1v-10.016c0-0.547 0.469-0.984 1-1 0.547-0.016 1.484-0.344 2.469-0.688 1.687-0.578 3.797-1.313 6.031-1.313h2.016c1.375 0.016 2.406 0.422 3.078 1.219 0.594 0.703 0.859 1.656 0.766 2.828 0.391 0.375 0.688 0.891 0.844 1.469 0.172 0.625 0.172 1.25 0 1.828 0.469 0.625 0.703 1.359 0.672 2.141 0 0.219-0.063 0.688-0.234 1.188z"></path>
+        </symbol>
+
+        <symbol id="icon-thumbs-up" viewBox="0 0 25 28">
+          <title>thumbs-up</title>
+          <path d="M4 21c0-0.547-0.453-1-1-1-0.562 0-1 0.453-1 1 0 0.562 0.438 1 1 1 0.547 0 1-0.438 1-1zM6.5 13v10c0 0.547-0.453 1-1 1h-4.5c-0.547 0-1-0.453-1-1v-10c0-0.547 0.453-1 1-1h4.5c0.547 0 1 0.453 1 1zM25 13c0 0.828-0.328 1.719-0.859 2.328 0.172 0.5 0.234 0.969 0.234 1.188 0.031 0.781-0.203 1.516-0.672 2.141 0.172 0.578 0.172 1.203 0 1.828-0.156 0.578-0.453 1.094-0.844 1.469 0.094 1.172-0.172 2.125-0.766 2.828-0.672 0.797-1.703 1.203-3.078 1.219h-2.016c-2.234 0-4.344-0.734-6.031-1.313-0.984-0.344-1.922-0.672-2.469-0.688-0.531-0.016-1-0.453-1-1v-10.016c0-0.516 0.438-0.953 0.953-1 0.578-0.047 2.078-1.906 2.766-2.812 0.562-0.719 1.094-1.391 1.578-1.875 0.609-0.609 0.781-1.547 0.969-2.453 0.172-0.922 0.359-1.891 1.031-2.547 0.187-0.187 0.438-0.297 0.703-0.297 3.5 0 3.5 2.797 3.5 4 0 1.281-0.453 2.188-0.875 3-0.172 0.344-0.328 0.5-0.453 1h4.328c1.625 0 3 1.375 3 3z"></path>
+        </symbol>
+      </defs>
+    </svg>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <strong class="mr-auto">
         The best places to eat, when you don't want to treat!</strong>
       <span class="navbar-text pull-right mr-lg-0">
         <% if user_signed_in? %>
-          Logged in as <strong><%= current_user.username %></strong> | 
+          Logged in as <strong><%= current_user.username %></strong> |
           <%= link_to "Edit profile", edit_user_registration_path, :class => 'navbar-link' %> |
           <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
         <% else %>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :comments
+  resources :comments#, only: [:create, :index, :destroy]
   # resources :votes
   devise_for :users
   resources :restaurants, except: [:destroy] do

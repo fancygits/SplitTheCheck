@@ -1,6 +1,7 @@
 class RestaurantsController < ApplicationController
+  # before_action :authenticate_user!, except: [:index, :show, :search, :clear, :page]
+  before_action :authenticate_user!, only: [:new, :create, :update, :vote, :edit, :favorite, :comment]
   before_action :set_restaurant, only: [:show, :edit, :update, :vote, :favorite]
-  before_action :authorize, only: [:new, :update, :vote, :edit, :favorite]
   before_action :get_total_pages, only: [:index]
   before_action :get_search_term, only: [:index]
   rescue_from StandardError, with: :no_results

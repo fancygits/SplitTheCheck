@@ -39,3 +39,31 @@ table{
   stroke: currentColor;
   fill: currentColor;
 }
+
+a.favorite:hover {
+  color: #EB6864;
+  text-decoration: none;
+}
+
+.star-empty {
+  margin-top: 0.5em;
+  transition: fill .2s ease-out;
+  stroke-width: 2;
+  fill: transparent;
+}
+
+.star-empty:hover {
+  color: currentColor;
+  fill: currentColor;
+}
+
+.star-full {
+  margin-top: 0.5em;
+  transition: fill .2s ease-out;
+  stroke-width: 2;
+  fill: currentColor;
+}
+
+.star-full:hover {
+  fill: transparent;
+}

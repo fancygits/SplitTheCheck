@@ -19,7 +19,9 @@
  }
 
 form {
-  @media(min-width: 30em) {
-    width: 60%;
+  width: 60%;
+  min-width: 300px;
+  @media(max-width: 768px) {
+    width: 100%;
   }
 }

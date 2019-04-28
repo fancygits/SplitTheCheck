@@ -1,5 +1,6 @@
 <h1 class="d-inline">
   <% restaurant = @restaurant %>
+  <%= render "restaurants/favoritestar", restaurant: restaurant %>
   <%= @restaurant.name %>
   <%= content_tag :small, "#{@restaurant.cuisine}", class: "text-muted" %>
 </h1>

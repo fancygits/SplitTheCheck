@@ -21,9 +21,7 @@ class CommentsController < ApplicationController
         format.html { redirect_to restaurant_path(@restaurant), notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
-
-
-        @restaurant = Restaurant.find(params[:restaurant_id])
+        find_restaurant!
         format.html { redirect_to restaurant_path(@restaurant) , alert: 'Comment could not be saved.' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end

@@ -14,6 +14,7 @@ class UsersController < ApplicationController
       # @comment = @user.comments.build
       @comments = @user.comments.order(created_at: :desc)
       @favorites = @user.favorites.all
+      @votes = @user.votes.all
     end
   end
 end

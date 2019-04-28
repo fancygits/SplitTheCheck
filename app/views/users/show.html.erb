@@ -11,15 +11,33 @@
     <h4 class="card-header">Favorites</h4>
     <% if @favorites.empty? %>
       <h6 class="card-body">You haven't favorited any restaurants.</h6>
+    <% else %>
+      <ul class="list-group list-group-flush">
+        <% @favorites.each do |favorite| %>
+          <li class="list-group-item p-1">
+            <%= render "restaurants/favoritestar", restaurant: favorite.restaurant %>
+            <%= link_to favorite.restaurant.name, restaurant_path(favorite.restaurant) %>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
-    <ul class="list-group list-group-flush">
-      <% @favorites.each do |favorite| %>
-        <li class="list-group-item p-1">
-          <%= render "restaurants/favoritestar", restaurant: favorite.restaurant %>
-          <%= link_to favorite.restaurant.name, restaurant_path(favorite.restaurant) %>
-        </li>
-      <% end %>
   </aside>
+
+  <section class="votes card border-primary m-3">
+    <h4 class="card-header" data-toggle="collapse" href="#voteList" role="button" aria-expanded="false" aria-controls="voteList">
+      You have voted for <%= pluralize(@user.votes.count, " restaurant") %>
+    </h4>
+    <div id="voteList" class="collapse multi-collapse">
+      <ul class="list-group list-group-flush">
+        <% @votes.each do |vote| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center p-1">
+            <%= link_to vote.restaurant.name, restaurant_path(vote.restaurant) %>
+            <span class="badge badge-primary badge-pill">Will Split</span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
 
   <section class="comments m-3">
     <h4>You have posted <%= pluralize(@user.comments.count, " Comment") %></h4>

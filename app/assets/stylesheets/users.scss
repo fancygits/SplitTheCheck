@@ -9,3 +9,14 @@
     width: 100%;
   }
 }
+
+.votes {
+  width: 40%;
+  min-width: 300px;
+  @media(max-width: 768px) {
+    width: 100%;
+  }
+  .card-header {
+    cursor: pointer;
+  }
+}

@@ -1,5 +1,3 @@
-# Followed tutorial found at https://thinkster.io/tutorials/rails-json-api/adding-comments-to-articles
-
 class CommentsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :find_restaurant!
@@ -7,10 +5,6 @@ class CommentsController < ApplicationController
   def index
     @comments = @restaurant.comments.order(created_at: :desc)
   end
-
-  # def new
-  #   @comment = Comment.new
-  # end
 
   def create
     @comment = @restaurant.comments.build(comment_params)

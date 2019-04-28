@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  # resources :users, only: [:show]
   resources :restaurants, except: [:destroy] do
     member do
       put 'vote', as: 'vote'
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   root 'restaurants#index'
+  get 'profile' => 'users#show'
   get 'page/:page', to: 'restaurants#page', as: :page
   get 'clear' => 'restaurants#clear_search'
   match '*path' => redirect('/'), via: :get

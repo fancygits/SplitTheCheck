@@ -11,8 +11,9 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       @user = current_user
-      @comment = @user.comments.build
+      # @comment = @user.comments.build
       @comments = @user.comments.order(created_at: :desc)
+      @favorites = @user.favorites.all
     end
   end
 end

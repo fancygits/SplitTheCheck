@@ -3,6 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .comment {
-  width: 100%;
-  max-width: 500px;
+  width: 60%;
+  min-width: 300px;
+  @media(max-width: 768px) {
+    width: 100%;
+  }
 }

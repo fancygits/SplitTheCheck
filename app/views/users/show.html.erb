@@ -5,23 +5,39 @@
 <h6 class="d-inline">
   <%= link_to 'Edit', edit_user_registration_path, class: "small text-muted" %>
 </h6>
+<div class="clearfix">
 
-<div class="comments m-3">
-  <h4>You have posted <%= pluralize(@user.comments.count, " Comment") %></h4>
-  <% @comments.each do |comment| %>
-    <div class="comment card border-secondary m-2">
+  <aside class="favorites card text-white bg-primary float-md-right mr-5">
+    <h4 class="card-header">Favorites</h4>
+    <% if @favorites.empty? %>
+      <h6 class="card-body">You haven't favorited any restaurants.</h6>
+    <% end %>
+    <ul class="list-group list-group-flush">
+      <% @favorites.each do |favorite| %>
+        <li class="list-group-item p-1">
+          <%= render "restaurants/favoritestar", restaurant: favorite.restaurant %>
+          <%= link_to favorite.restaurant.name, restaurant_path(favorite.restaurant) %>
+        </li>
+      <% end %>
+  </aside>
 
-      <div class="card-body p-2">
-        <h6 class="card-title">
-          For <%= link_to comment.restaurant.name, restaurant_path(comment.restaurant), class: "card-link" %>:
-        </h6>
-        <div class="card-text">
-          <%= comment.body %>
+  <section class="comments m-3">
+    <h4>You have posted <%= pluralize(@user.comments.count, " Comment") %></h4>
+    <% @comments.each do |comment| %>
+      <div class="comment card border-secondary m-2">
+
+        <div class="card-body p-2">
+          <h6 class="card-title">
+            For <%= link_to comment.restaurant.name, restaurant_path(comment.restaurant), class: "card-link" %>:
+          </h6>
+          <div class="card-text">
+            <%= comment.body %>
+          </div>
+        </div>
+        <div class="card-footer p-1">
+          <small class="float-right">Posted on: <%= time_tag(comment.created_at) %></small>
         </div>
       </div>
-      <div class="card-footer p-1">
-        <small class="float-right">Posted on: <%= time_tag(comment.created_at) %></small>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
+  </section>
 </div>

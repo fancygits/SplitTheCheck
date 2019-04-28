@@ -1,9 +1,18 @@
 class UsersController < ApplicationController
+
+  # def index
+  #   @user = current_user
+  #   @comment = @user.comments.build
+  #   @comments = @user.comments.order(created_at: :desc)
+  # end
+
   def show
     unless user_signed_in?
       redirect_to root_path
     else
       @user = current_user
+      @comment = @user.comments.build
+      @comments = @user.comments.order(created_at: :desc)
     end
   end
 end

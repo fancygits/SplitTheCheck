@@ -2,7 +2,6 @@
   <% restaurant = @restaurant %>
   <%= @restaurant.name %>
   <%= content_tag :small, "#{@restaurant.cuisine}", class: "text-muted" %>
-
 </h1>
 <h6 class="d-inline">
   <%= link_to 'Edit', edit_restaurant_path(@restaurant), class: "small text-muted" %>

@@ -1,3 +1,27 @@
-<h1><%= @user.username %></h1>
+<h1 class="d-inline">
+  <%= @user.username %>
+<%= content_tag :small, "#{@user.email}", class: "text-muted" %>
+</h1>
+<h6 class="d-inline">
+  <%= link_to 'Edit', edit_user_registration_path, class: "small text-muted" %>
+</h6>
 
-<%= @user.email %>
+<div class="comments m-3">
+  <h4>You have posted <%= pluralize(@user.comments.count, " Comment") %></h4>
+  <% @comments.each do |comment| %>
+    <div class="comment card border-secondary m-2">
+
+      <div class="card-body p-2">
+        <h6 class="card-title">
+          For <%= link_to comment.restaurant.name, restaurant_path(comment.restaurant), class: "card-link" %>:
+        </h6>
+        <div class="card-text">
+          <%= comment.body %>
+        </div>
+      </div>
+      <div class="card-footer p-1">
+        <small class="float-right">Posted on: <%= time_tag(comment.created_at) %></small>
+      </div>
+    </div>
+  <% end %>
+</div>

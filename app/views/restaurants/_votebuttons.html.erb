@@ -20,7 +20,7 @@ Render buttons to vote on a restaurant
     <% end %>
 
     <%= link_to vote_restaurant_path(restaurant, :split => 'wont_split'),
-          class: "hvr-icon-hang hvr-shutter-in-horizontal btn  wont", method: :put do %>
+          class: "hvr-icon-hang hvr-shutter-in-horizontal btn wont", method: :put do %>
       <svg class="icon icon-thumbs-down hvr-icon"><use xlink:href="#icon-thumbs-down"></use></svg>
       <%= wont_split %><br> Won't Split
     <% end %>

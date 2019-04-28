@@ -10,28 +10,28 @@ Render buttons to vote on a restaurant
 
 <% will_split = restaurant.will_split %>
 <% wont_split = restaurant.wont_split %>
-<%= content_tag :div, id: "#{restaurant.id}voting_buttons" do %>
+<%= content_tag :div, id: "#{restaurant.id}voting_buttons", class: "btn-group-sm" do %>
 
-  <% unless current_user.blank? || current_user.has_voted_for?(restaurant) %>
+  <% if user_signed_in? && !current_user.has_voted_for?(restaurant) %>
     <%= link_to vote_restaurant_path(restaurant, :split => 'will_split'),
-          {class: "hvr-icon-bob hvr-shutter-out-horizontal btn btn-md", method: :put} do %>
+          {class: "hvr-icon-bob hvr-shutter-out-horizontal btn will", method: :put} do %>
       <svg class="icon icon-thumbs-up hvr-icon"><use xlink:href="#icon-thumbs-up"></use></svg>
       <%= will_split %><br> Will Split
     <% end %>
 
     <%= link_to vote_restaurant_path(restaurant, :split => 'wont_split'),
-          class: "hvr-icon-hang hvr-shutter-in-horizontal btn btn-md", method: :put do %>
-      <svg viewBox="0 0 25 28" width="200" height="100" class="icon icon-thumbs-down hvr-icon"><use xlink:href="#icon-thumbs-down"></use></svg>
+          class: "hvr-icon-hang hvr-shutter-in-horizontal btn  wont", method: :put do %>
+      <svg class="icon icon-thumbs-down hvr-icon"><use xlink:href="#icon-thumbs-down"></use></svg>
       <%= wont_split %><br> Won't Split
     <% end %>
 
   <% else %>
-    <%= link_to '#', {class: "disabled will btn btn-md btn-outline-success", disabled: true} do %>
+    <%= link_to '#', {class: "disabled will btn btn-outline-success", disabled: true} do %>
       <svg class="icon icon-thumbs-up"><use xlink:href="#icon-thumbs-up"></use></svg>
       <%= will_split %><br> Will Split
     <% end %>
 
-    <%= link_to '#', {class: "disabled wont btn btn-md btn-outline-primary", disabled: true} do %>
+    <%= link_to '#', {class: "disabled wont btn btn-outline-primary", disabled: true} do %>
       <svg class="icon icon-thumbs-down"><use xlink:href="#icon-thumbs-down"></use></svg>
       <%= wont_split %><br> Won't Split
     <% end %>

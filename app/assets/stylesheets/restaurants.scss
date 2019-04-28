@@ -1,3 +1,41 @@
-tr {
-  height: 60px;
+table{
+  tr {
+    height: 60px;
+  }
+  td.favoriteButton {
+    width: 20px;
+  }
+  td.restaurantName {
+    width: 200px;
+  }
+  td.restaurantCuisine {
+    width: 100px;
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+  td.restaurantAddress {
+    width: 300px;
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+  td.voteButtons {
+    width: 220px;
+  }
+}
+
+.will, .wont {
+  width: 80px;
+  padding: 5px;
+}
+
+.icon {
+  display: inline-block;
+  margin-bottom: 0.5em;
+  width: 1.25em;
+  height: 1.25em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
 }

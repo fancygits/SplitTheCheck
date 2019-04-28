@@ -16,21 +16,16 @@
 </nav>
 <table>
   <tbody>
-    <col style="width:20px">
-    <col style="width:200px">
-    <col style="width:100px">
-    <col style="width:300px">
-    <col style="width:210px">
     <% @restaurants.each do |restaurant| %>
       <tr>
-        <td>
+        <td class="favoriteButton">
           <%= render "favoritestar", restaurant: restaurant %>
         </td>
-        <td><%= link_to restaurant.name, restaurant %></td>
-        <td><%= restaurant.cuisine %></td>
-        <td><%= "#{restaurant.street_address}, #{restaurant.city},
+        <td class="restaurantName"><%= link_to restaurant.name, restaurant %></td>
+        <td class="restaurantCuisine"><%= restaurant.cuisine %></td>
+        <td class="restaurantAddress"><%= "#{restaurant.street_address}, #{restaurant.city},
           #{restaurant.state}  #{restaurant.postcode}" %></td>
-        <td>
+        <td class="voteButtons">
           <%= render "votebuttons", restaurant: restaurant %>
         </td>
       </tr>

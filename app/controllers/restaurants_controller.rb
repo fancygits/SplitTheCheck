@@ -10,10 +10,12 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     if params[:search]
-      session[:page] = 1
       session[:search] = params[:search]
     end
-    @page = session[:page].to_i
+    unless session[:page]
+      session[:page] = 1
+    end
+    @page = set_page
     @restaurants = Restaurant.order('name').search(session[:search]).limit(10).offset((@page - 1) * 10)
     get_total_pages
     @total_pages = session[:total_pages]
@@ -23,6 +25,8 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1
   # GET /restaurants/1.json
   def show
+    @comments = @restaurant.comments.all
+    @comment = @restaurant.comments.build
   end
 
   # GET /restaurants/new
@@ -135,13 +139,5 @@ end
 
     def get_total_pages
       session[:total_pages] = (Restaurant.search(session[:search]).count / 10.0).ceil
-    end
-
-    protected
-
-    def authorize
-      unless user_signed_in?
-        redirect_to new_user_session_path, alert: "You need to sign in or sign up before continuing."
-      end
     end
 end

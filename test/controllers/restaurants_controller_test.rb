@@ -33,7 +33,6 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Restaurant.count') do
       post restaurants_url, params: { restaurant: { city: @restaurant.city, cuisine: @restaurant.cuisine, name: @restaurant.name, postcode: @restaurant.postcode, state: @restaurant.state, street_address: @restaurant.street_address} }
     end
-
     assert_redirected_to restaurant_url(Restaurant.last)
   end
 
@@ -100,6 +99,21 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not allow voting if not signed in" do
     put vote_restaurant_path(@restaurant), params: { split: "will_split" }
+    assert_redirected_to new_user_session_path
+  end
+
+  test "should favorite and add to user's favorites" do
+    sign_in @user
+    get restaurant_url(@restaurant)
+    assert_equal false, @user.has_voted_for?(@restaurant)
+    assert_difference('@user.favorites.count') do
+      put favorite_restaurant_path(@restaurant)
+    end
+    assert @user.has_favorited?(@restaurant)
+  end
+
+  test "should not allow favoriting if not signed in" do
+    put favorite_restaurant_path(@restaurant)
     assert_redirected_to new_user_session_path
   end
 

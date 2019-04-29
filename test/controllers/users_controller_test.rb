@@ -1,9 +1,24 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  test "should get show" do
-    get users_show_url
+
+  include Devise::Test::IntegrationHelpers
+
+  setup do
+    @user = users(:validUser)
+    @restaurant = restaurants(:unique)
+  end
+
+  test "should get user profile" do
+    sign_in @user
+    get profile_url
     assert_response :success
+  end
+
+  test "should not get user profile if not logged in" do
+    get profile_url
+    assert_response :redirect
+    assert_redirected_to root_path
   end
 
 end

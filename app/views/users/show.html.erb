@@ -5,57 +5,75 @@
 <h6 class="d-inline">
   <%= link_to 'Edit', edit_user_registration_path, class: "small text-muted" %>
 </h6>
-<div class="clearfix">
 
-  <aside class="favorites card text-white bg-primary float-md-right mr-5">
-    <h4 class="card-header">Favorites</h4>
-    <% if @favorites.empty? %>
-      <h6 class="card-body">You haven't favorited any restaurants.</h6>
-    <% else %>
-      <ul class="list-group list-group-flush">
-        <% @favorites.each do |favorite| %>
-          <li class="list-group-item p-1">
-            <%= render "restaurants/favoritestar", restaurant: favorite.restaurant %>
-            <%= link_to favorite.restaurant.name, restaurant_path(favorite.restaurant) %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </aside>
+<div class="row profile">
+  <div class="col">
+    <section class="votes card border-primary">
+      <h4 class="card-header" data-toggle="collapse" href="#voteList" role="button" aria-expanded="false" aria-controls="voteList">
+        Voted for <%= pluralize(@user.votes.count, " restaurant") %>
+      </h4>
+      <div id="voteList" class="collapse">
+        <ul class="list-group list-group-flush">
+          <% @votes.each do |vote| %>
+            <li class="list-group-item d-flex justify-content-between align-items-center p-1">
+              <%= link_to vote.restaurant.name, restaurant_path(vote.restaurant) %>
 
-  <section class="votes card border-primary m-3">
-    <h4 class="card-header" data-toggle="collapse" href="#voteList" role="button" aria-expanded="false" aria-controls="voteList">
-      You have voted for <%= pluralize(@user.votes.count, " restaurant") %>
-    </h4>
-    <div id="voteList" class="collapse multi-collapse">
-      <ul class="list-group list-group-flush">
-        <% @votes.each do |vote| %>
-          <li class="list-group-item d-flex justify-content-between align-items-center p-1">
-            <%= link_to vote.restaurant.name, restaurant_path(vote.restaurant) %>
-            <span class="badge badge-primary badge-pill">Will Split</span>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </section>
-
-  <section class="comments m-3">
-    <h4>You have posted <%= pluralize(@user.comments.count, " Comment") %></h4>
-    <% @comments.each do |comment| %>
-      <div class="comment card border-secondary m-2">
-
-        <div class="card-body p-2">
-          <h6 class="card-title">
-            For <%= link_to comment.restaurant.name, restaurant_path(comment.restaurant), class: "card-link" %>:
-          </h6>
-          <div class="card-text">
-            <%= comment.body %>
-          </div>
-        </div>
-        <div class="card-footer p-1">
-          <small class="float-right">Posted on: <%= time_tag(comment.created_at) %></small>
-        </div>
+                <% if vote.split == "will_split" %>
+                  <span class="badge badge-success badge-pill">Will Split
+                <% else %>
+                  <span class="badge badge-primary badge-pill">Won't Split
+                <% end %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
       </div>
-    <% end %>
-  </section>
+    </section>
+  </div>
+
+  <div class="col">
+    <section class="comments card border-info">
+      <h4 class="card-header" data-toggle="collapse" href="#commentList" role="button" aria-expanded="false" aria-controls="voteList">
+        Posted <%= pluralize(@user.comments.count, " comment") %>
+      </h4>
+      <div id="commentList" class="collapse">
+        <% @comments.each do |comment| %>
+          <div class="comment card border-secondary m-3">
+            <div class="card-body p-2">
+              <h6 class="card-title">
+                For <%= link_to comment.restaurant.name, restaurant_path(comment.restaurant), class: "card-link" %>:
+              </h6>
+              <div class="card-text">
+                <%= comment.body %>
+              </div>
+            </div>
+            <div class="card-footer p-1">
+              <small class="float-right">Posted on: <%= time_tag(comment.created_at) %></small>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  </div>
+
+  <div class="col">
+    <section class="favorites card text-white bg-primary">
+      <h4 class="card-header" data-toggle="collapse" href="#favoriteList" role="button" aria-expanded="false" aria-controls="voteList">
+        Marked <%= pluralize(@user.favorites.count," favorites") %>
+      </h4>
+      <div id="favoriteList" class="collapse "
+      <% if @favorites.empty? %>
+        <h6 class="card-body">You haven't favorited any restaurants.</h6>
+      <% else %>
+        <ul class="list-group list-group-flush">
+          <% @favorites.each do |favorite| %>
+            <li class="list-group-item p-1">
+              <%= render "restaurants/favoritestar", restaurant: favorite.restaurant %>
+              <%= link_to favorite.restaurant.name, restaurant_path(favorite.restaurant) %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </section>
+  </div>
 </div>

@@ -10,9 +10,9 @@ Render a star to favorite on a restaurant
 <% if user_signed_in? %>
   <%= link_to favorite_restaurant_path(restaurant), class: "favorite", method: :put do %>
     <% unless current_user.has_favorited?(restaurant) %>
-      <svg class="icon star-empty "><use xlink:href="#icon-star-full"></use></svg>
+      <svg class="icon star-empty"><use xlink:href="#icon-star-full"></use></svg>
     <% else %>
-      <svg class="icon star-full "><use xlink:href="#icon-star-full"></use></svg>
+      <svg class="icon star-full"><use xlink:href="#icon-star-full"></use></svg>
     <% end %>
   <% end %>
 <% end %>

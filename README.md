@@ -16,3 +16,6 @@ Seed the database with rake db:seed
 
 ### Test suite
 Test the logic by running rake test
+
+### Continuous Integration 
+Continuous Integration/Continuous Deployment by CodeShip
